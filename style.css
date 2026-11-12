@@ -104,15 +104,34 @@ hr.pencil-line {
 #cat-graphic { left: 10%; top: 16%; }
 #cat-fab     { right: 8%; top: 30%; }
 #cat-craft   { left: 22%; bottom: 14%; }
+#cat-about   { right: 16%; bottom: 18%; }
 
 @media (max-width: 600px) {
   #cat-graphic { left: 6%;  top: 14%; }
   #cat-fab     { right: 5%; top: auto; bottom: 24%; }
   #cat-craft   { left: 10%; bottom: 10%; }
+  #cat-about   { right: 8%; top: 30%; bottom: auto; }
 }
 
-.about { max-width: 34rem; }
-.about h2 { font-weight: 400; font-size: 2.4rem; margin: 0 0 .5rem; }
+/* about: opens in place, just under the name */
+.about {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 3.2rem);
+  transform: translateX(-50%);
+  width: min(30rem, 84vw);
+  padding: 1rem 1.3rem;
+  background: var(--paper);
+  border: 1px solid var(--graphite-light);
+  border-radius: 3px 8px 4px 9px / 9px 3px 8px 4px;
+  z-index: 5;
+  animation: fade-in .25s ease;
+}
+.about[hidden] { display: none; }
+.about p:first-child { margin-top: 0; }
+.about p:last-child { margin-bottom: 0; }
+body.about-open #cat-about { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+@keyframes fade-in { from { opacity: 0; transform: translate(-50%, 6px); } }
 
 /* ---------- category pages ---------- */
 .back { font-size: 1.4rem; color: var(--graphite-light); }
@@ -212,3 +231,9 @@ p.back a:hover { color: var(--graphite); }
 .photos figcaption { color: var(--graphite-light); font-size: 1.2rem; margin-top: .2rem; }
 .photos img.poster { max-width: 560px; }
 .photos video { width: 100%; display: block; background: #000; }
+
+/* about panel on phones: smaller so it fits under the name */
+@media (max-width: 600px) {
+  .about { top: calc(50% + 2.2rem); padding: .8rem 1rem; }
+  .about p { font-size: .88rem; line-height: 1.5; }
+}

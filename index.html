@@ -18,15 +18,29 @@
     <a class="cat" id="cat-graphic" href="graphic-design.html">graphic design</a>
     <a class="cat" id="cat-fab" href="digital-fabrication.html">digital fabrication</a>
     <a class="cat" id="cat-craft" href="craft.html">craft</a>
-  </section>
+    <a class="cat" id="cat-about" href="#about" aria-expanded="false" aria-controls="about">about</a>
 
-  <main>
-    <section class="about">
-      <h2>about</h2>
+    <section class="about" id="about" hidden>
       <p>My design practice grew out of many different sources of knowledge and is, at its heart, transdisciplinary. I take inspiration from natural processes and aesthetics and transform them into digital or physical manifestations.</p>
       <p>Nature creates through complex nanoscale mechanisms and leaves behind artefacts and fossils that we sometimes forget were actively shaped by living organisms, not only by physical processes.</p>
     </section>
-  </main>
+  </section>
   <script src="pencil.js"></script>
+  <script>
+    // "about" opens right here on the homepage instead of going to another page
+    const toggle = document.getElementById("cat-about");
+    const about = document.getElementById("about");
+    function setOpen(open) {
+      about.hidden = !open;
+      toggle.setAttribute("aria-expanded", open);
+      document.body.classList.toggle("about-open", open);
+    }
+    toggle.addEventListener("click", e => { e.preventDefault(); setOpen(about.hidden); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") setOpen(false); });
+    document.addEventListener("click", e => {
+      if (!about.hidden && !about.contains(e.target) && e.target !== toggle) setOpen(false);
+    });
+    if (location.hash === "#about") setOpen(true);
+  </script>
 </body>
 </html>
